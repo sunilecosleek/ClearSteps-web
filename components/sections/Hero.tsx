@@ -320,7 +320,7 @@ export default function Hero() {
             className="flex flex-wrap items-center gap-3.5 mb-8"
           >
             <MagneticBtn
-              href="#"
+              href="https://app.clearsteps.co.in"
               className="inline-flex items-center gap-2.5 bg-ink text-white px-7 py-3.5 rounded-full font-bold text-[0.95rem] shadow-[0_8px_30px_rgba(15,15,26,0.25)] hover:bg-primary hover:shadow-[0_12px_40px_rgba(78,75,229,0.4)] transition-colors"
             >
               Start Learning Free

@@ -125,7 +125,7 @@ export default function CTA() {
             </MagneticCTA>
 
             <MagneticCTA
-              href="#"
+              href="https://app.clearsteps.co.in"
               className="inline-flex items-center gap-2.5 bg-white/8 text-white px-7 py-4 rounded-full font-semibold text-[0.95rem] border border-white/20 hover:bg-white/15 transition-colors w-full sm:w-auto justify-center"
             >
               Start Free First

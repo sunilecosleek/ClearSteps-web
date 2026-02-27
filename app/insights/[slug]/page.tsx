@@ -330,7 +330,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
               against the official CBSE marking scheme. Free to start.
             </p>
             <a
-              href="/"
+              href="https://app.clearsteps.co.in"
               className="inline-block px-7 py-3.5 rounded-full font-syne font-extrabold text-white bg-ink hover:bg-primary transition-colors text-sm"
             >
               Start Free →

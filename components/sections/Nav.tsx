@@ -156,13 +156,13 @@ export default function Nav() {
         {/* Desktop CTAs — MAGNETIC */}
         <div className="hidden lg:flex items-center gap-2.5">
           <MagneticNavBtn
-            href="#"
+            href="https://app.clearsteps.co.in/login"
             className="px-5 py-2.5 rounded-full text-[0.85rem] font-semibold text-ink-2 border-[1.5px] border-ink/15 hover:border-ink hover:text-ink transition-all"
           >
             Log In
           </MagneticNavBtn>
           <MagneticNavBtn
-            href="#"
+            href="https://app.clearsteps.co.in"
             className="px-5 py-2.5 rounded-full text-[0.85rem] font-bold text-white bg-ink hover:bg-primary hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(78,75,229,0.35)] transition-all"
           >
             Start Free →
@@ -251,14 +251,14 @@ export default function Nav() {
               className="mt-4 flex flex-col gap-3 items-center"
             >
               <a
-                href="#"
+                href="https://app.clearsteps.co.in"
                 className="bg-primary text-white px-10 py-4 rounded-full font-syne font-extrabold text-[1.1rem] hover:bg-ink transition-colors"
                 data-cursor-hover
               >
                 Start Free →
               </a>
               <a
-                href="#"
+                href="https://app.clearsteps.co.in/login"
                 className="text-[0.88rem] font-semibold text-ink-3 hover:text-ink transition-colors"
                 data-cursor-hover
               >

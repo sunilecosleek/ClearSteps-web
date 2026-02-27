@@ -76,7 +76,7 @@ function MagneticPricingBtn({ plan }: { plan: typeof pricingPlans[0] }) {
   return (
     <motion.a
       ref={ref}
-      href="#"
+      href="https://app.clearsteps.co.in"
       style={{ x, y }}
       whileTap={{ scale: 0.97 }}
       className={`w-full py-3.5 rounded-full font-syne font-bold text-[0.9rem] transition-all text-center block ${

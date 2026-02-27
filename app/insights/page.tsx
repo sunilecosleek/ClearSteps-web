@@ -240,7 +240,7 @@ export default function InsightsPage() {
             real score improvement.
           </p>
           <a
-            href="/"
+            href="https://app.clearsteps.co.in"
             className="inline-block px-8 py-4 rounded-full font-syne font-extrabold text-ink bg-surface hover:bg-primary hover:text-white transition-all duration-200"
           >
             Try ClearSteps Free →

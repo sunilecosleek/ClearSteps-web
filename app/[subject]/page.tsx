@@ -7,7 +7,6 @@ import {
   subjects,
   getSubjectBySlug,
   type SubjectPage,
-  type Chapter,
 } from "@/lib/subjects";
 import { getArticleBySlug } from "@/lib/insights";
 
@@ -161,7 +160,7 @@ export default function SubjectPage({ params }: { params: { subject: string } })
                 {page.description}
               </p>
               <a
-                href="/"
+                href="https://app.clearsteps.co.in"
                 className="inline-block px-8 py-4 rounded-full font-syne font-extrabold text-white bg-ink hover:bg-primary hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(78,75,229,0.3)] transition-all text-sm"
               >
                 Practice with AI Evaluation →
@@ -317,7 +316,7 @@ export default function SubjectPage({ params }: { params: { subject: string } })
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="/"
+                href="https://app.clearsteps.co.in"
                 className="px-8 py-4 rounded-full font-syne font-extrabold text-ink bg-surface hover:bg-primary hover:text-white transition-all"
               >
                 Try ClearSteps Free →
