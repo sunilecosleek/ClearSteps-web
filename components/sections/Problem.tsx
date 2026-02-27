@@ -3,13 +3,120 @@
 import { motion } from "framer-motion";
 import { problemCards } from "@/lib/data";
 import { use3DTilt, staggerContainer, fadeUpItem } from "@/lib/hooks";
-import { Icon, IconName } from "@/lib/icons";
 
 const accentTop: Record<string, string> = {
   amber: "from-amber to-amber-2",
   teal: "from-teal to-teal-2",
   coral: "from-coral to-orange-200",
 };
+
+const accentIconBg: Record<string, string> = {
+  amber: "bg-amber/12",
+  teal: "bg-teal/12",
+  coral: "bg-coral/12",
+};
+
+const accentStroke: Record<string, string> = {
+  amber: "#F59E0B",
+  teal: "#14B8A6",
+  coral: "#F97316",
+};
+
+const accentGlowFrames: Record<string, string[]> = {
+  amber: [
+    "0 0 0px 0px rgba(245,158,11,0)",
+    "0 0 22px 7px rgba(245,158,11,0.22)",
+    "0 0 0px 0px rgba(245,158,11,0)",
+  ],
+  teal: [
+    "0 0 0px 0px rgba(20,184,166,0)",
+    "0 0 22px 7px rgba(20,184,166,0.22)",
+    "0 0 0px 0px rgba(20,184,166,0)",
+  ],
+  coral: [
+    "0 0 0px 0px rgba(249,115,22,0)",
+    "0 0 22px 7px rgba(249,115,22,0.22)",
+    "0 0 0px 0px rgba(249,115,22,0)",
+  ],
+};
+
+// Animated SVG icons — each path draws itself in on entry
+function AnimatedProblemIcon({
+  name,
+  accent,
+  entryDelay,
+}: {
+  name: string;
+  accent: string;
+  entryDelay: number;
+}) {
+  const stroke = accentStroke[accent];
+
+  // Returns animation props for each sub-path, staggered by `d` seconds
+  const p = (d: number, dur = 0.65) => ({
+    stroke,
+    initial: { pathLength: 0, opacity: 0 },
+    whileInView: { pathLength: 1, opacity: 1 },
+    viewport: { once: true },
+    transition: {
+      pathLength: { duration: dur, delay: entryDelay + d, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] },
+      opacity:   { duration: 0.01, delay: entryDelay + d },
+    },
+  });
+
+  if (name === "book-open") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        {/* Left page */}
+        <motion.path {...p(0)}    d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        {/* Right page */}
+        <motion.path {...p(0.08)} d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+        {/* Left text lines — simulate content */}
+        <motion.line {...p(0.38, 0.32)} x1="5" y1="9"  x2="9"  y2="9"  strokeOpacity="0.55" />
+        <motion.line {...p(0.44, 0.32)} x1="5" y1="12" x2="9"  y2="12" strokeOpacity="0.55" />
+        <motion.line {...p(0.50, 0.28)} x1="5" y1="15" x2="7.5" y2="15" strokeOpacity="0.35" />
+        {/* Right text lines */}
+        <motion.line {...p(0.38, 0.32)} x1="15" y1="9"  x2="19" y2="9"  strokeOpacity="0.55" />
+        <motion.line {...p(0.44, 0.32)} x1="15" y1="12" x2="19" y2="12" strokeOpacity="0.55" />
+        <motion.line {...p(0.50, 0.28)} x1="15" y1="15" x2="17.5" y2="15" strokeOpacity="0.35" />
+      </svg>
+    );
+  }
+
+  if (name === "pencil") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        {/* Pen nib / diagonal slash — draws first, most impactful */}
+        <motion.path {...p(0)}    d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+        {/* Document border */}
+        <motion.path {...p(0.3)}  d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+        {/* Written lines inside doc — appear last, suggest active writing */}
+        <motion.line {...p(0.58, 0.38)} x1="5" y1="15" x2="10" y2="15" strokeOpacity="0.45" />
+        <motion.line {...p(0.65, 0.38)} x1="5" y1="18" x2="9"  y2="18" strokeOpacity="0.3" />
+      </svg>
+    );
+  }
+
+  if (name === "target") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        {/* Outer ring */}
+        <motion.circle {...p(0)}    cx="12" cy="12" r="10" />
+        {/* Middle ring */}
+        <motion.circle {...p(0.22)} cx="12" cy="12" r="6" />
+        {/* Bullseye */}
+        <motion.circle {...p(0.42)} cx="12" cy="12" r="2" />
+        {/* Crosshair ticks — subtle, appear after rings */}
+        <motion.line {...p(0.58, 0.22)} x1="12" y1="2"  x2="12" y2="5.5"  strokeOpacity="0.4" strokeWidth="1.3" />
+        <motion.line {...p(0.58, 0.22)} x1="12" y1="18.5" x2="12" y2="22" strokeOpacity="0.4" strokeWidth="1.3" />
+        <motion.line {...p(0.63, 0.22)} x1="2"  y1="12" x2="5.5" y2="12"  strokeOpacity="0.4" strokeWidth="1.3" />
+        <motion.line {...p(0.63, 0.22)} x1="18.5" y1="12" x2="22" y2="12" strokeOpacity="0.4" strokeWidth="1.3" />
+      </svg>
+    );
+  }
+
+  return null;
+}
 
 // Each card floats at a different speed + phase so they never move in sync
 const floatConfig = [
@@ -70,9 +177,9 @@ function ProblemCard({
             }}
           />
 
-          {/* Icon — spring scale-in on entry + repeating glow pulse */}
+          {/* Icon — spring scale-in on entry + repeating accent glow pulse */}
           <motion.div
-            className="w-12 h-12 rounded-[13px] bg-white/8 flex items-center justify-center mb-4 text-white/70"
+            className={`w-12 h-12 rounded-[13px] ${accentIconBg[card.accent]} flex items-center justify-center mb-4 relative`}
             initial={{ scale: 0.75, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
@@ -83,16 +190,10 @@ function ProblemCard({
               delay: 0.2 + index * 0.12,
             }}
           >
-            {/* Inner pulse ring */}
+            {/* Accent-colored pulse ring */}
             <motion.div
               className="absolute inset-0 rounded-[13px]"
-              animate={{
-                boxShadow: [
-                  "0 0 0px 0px rgba(255,255,255,0)",
-                  "0 0 16px 5px rgba(255,255,255,0.07)",
-                  "0 0 0px 0px rgba(255,255,255,0)",
-                ],
-              }}
+              animate={{ boxShadow: accentGlowFrames[card.accent] }}
               transition={{
                 duration: pulse.duration,
                 delay: pulse.delay,
@@ -100,7 +201,11 @@ function ProblemCard({
                 ease: "easeInOut",
               }}
             />
-            <Icon name={card.icon as IconName} size={22} />
+            <AnimatedProblemIcon
+              name={card.icon}
+              accent={card.accent}
+              entryDelay={0.32 + index * 0.12}
+            />
           </motion.div>
 
           <div className="font-syne font-bold text-[1rem] text-white mb-2 tracking-[-0.02em]">
