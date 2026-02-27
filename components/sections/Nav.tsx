@@ -6,11 +6,12 @@ import { cn } from "@/lib/utils";
 import { useMagneticButton } from "@/lib/hooks";
 
 const links = [
-  { href: "#what", label: "What We Do" },
-  { href: "#how", label: "How It Works" },
-  { href: "#features", label: "Features" },
-  { href: "#parents", label: "For Parents" },
-  { href: "#pricing", label: "Pricing" },
+  { href: "#what", label: "What We Do", page: false },
+  { href: "#how", label: "How It Works", page: false },
+  { href: "#features", label: "Features", page: false },
+  { href: "#parents", label: "For Parents", page: false },
+  { href: "#pricing", label: "Pricing", page: false },
+  { href: "/insights", label: "Study Tips", page: true },
 ];
 
 function MagneticNavBtn({
@@ -127,17 +128,29 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <button
-              key={l.href}
-              onClick={() => handleNavClick(l.href)}
-              className="text-[0.88rem] font-medium text-ink-2 hover:text-ink transition-colors relative group cursor-none"
-              data-cursor-hover
-            >
-              {l.label}
-              <span className="absolute -bottom-0.5 left-0 right-0 h-[1.5px] bg-primary scale-x-0 origin-left transition-transform duration-250 group-hover:scale-x-100" />
-            </button>
-          ))}
+          {links.map((l) =>
+            l.page ? (
+              <a
+                key={l.href}
+                href={l.href}
+                className="text-[0.88rem] font-medium text-ink-2 hover:text-ink transition-colors relative group cursor-none"
+                data-cursor-hover
+              >
+                {l.label}
+                <span className="absolute -bottom-0.5 left-0 right-0 h-[1.5px] bg-primary scale-x-0 origin-left transition-transform duration-250 group-hover:scale-x-100" />
+              </a>
+            ) : (
+              <button
+                key={l.href}
+                onClick={() => handleNavClick(l.href)}
+                className="text-[0.88rem] font-medium text-ink-2 hover:text-ink transition-colors relative group cursor-none"
+                data-cursor-hover
+              >
+                {l.label}
+                <span className="absolute -bottom-0.5 left-0 right-0 h-[1.5px] bg-primary scale-x-0 origin-left transition-transform duration-250 group-hover:scale-x-100" />
+              </button>
+            )
+          )}
         </div>
 
         {/* Desktop CTAs — MAGNETIC */}
@@ -197,22 +210,38 @@ export default function Nav() {
             <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-primary/5 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[200px] h-[200px] rounded-full bg-teal/5 translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
-            {links.map((l, i) => (
-              <motion.button
-                key={l.href}
-                custom={i}
-                variants={linkVariants}
-                initial="hidden"
-                animate="show"
-                onClick={() => handleNavClick(l.href)}
-                className="font-syne text-[2.2rem] font-extrabold text-ink hover:text-primary transition-colors relative group"
-                data-cursor-hover
-              >
-                {l.label}
-                {/* underline on hover */}
-                <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-primary scale-x-0 origin-left transition-transform group-hover:scale-x-100" />
-              </motion.button>
-            ))}
+            {links.map((l, i) =>
+              l.page ? (
+                <motion.a
+                  key={l.href}
+                  href={l.href}
+                  custom={i}
+                  variants={linkVariants}
+                  initial="hidden"
+                  animate="show"
+                  onClick={() => setMenuOpen(false)}
+                  className="font-syne text-[2.2rem] font-extrabold text-ink hover:text-primary transition-colors relative group"
+                  data-cursor-hover
+                >
+                  {l.label}
+                  <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-primary scale-x-0 origin-left transition-transform group-hover:scale-x-100" />
+                </motion.a>
+              ) : (
+                <motion.button
+                  key={l.href}
+                  custom={i}
+                  variants={linkVariants}
+                  initial="hidden"
+                  animate="show"
+                  onClick={() => handleNavClick(l.href)}
+                  className="font-syne text-[2.2rem] font-extrabold text-ink hover:text-primary transition-colors relative group"
+                  data-cursor-hover
+                >
+                  {l.label}
+                  <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-primary scale-x-0 origin-left transition-transform group-hover:scale-x-100" />
+                </motion.button>
+              )
+            )}
 
             <motion.div
               custom={links.length}
