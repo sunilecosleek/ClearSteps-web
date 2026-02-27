@@ -75,34 +75,42 @@ export default function Footer() {
         >
           {/* Brand col */}
           <motion.div variants={fadeUpItem}>
-            <a href="/" className="flex items-center gap-2.5 mb-4 no-underline" data-cursor-hover>
-              {/* Icon: same brand icon, slightly lighter purple on dark bg */}
-              <svg width="42" height="42" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="9" fill="#5957F5" />
-                {/* Arch outline */}
+            <a href="/" className="flex items-center gap-3 mb-4 no-underline" data-cursor-hover>
+              {/* Icon — portrait with gradient bg, glowing arch, road dashes */}
+              <svg width="38" height="44" viewBox="0 0 46 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ftIconBg" x1="23" y1="0" x2="23" y2="52" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#2A28A0" />
+                    <stop offset="100%" stopColor="#5250DC" />
+                  </linearGradient>
+                  <radialGradient id="ftArchGlow" cx="23" cy="46" r="22" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="rgba(255,255,255,0.95)" />
+                    <stop offset="35%" stopColor="rgba(255,255,255,0.55)" />
+                    <stop offset="65%" stopColor="rgba(255,255,255,0.18)" />
+                    <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+                  </radialGradient>
+                </defs>
+                <rect width="46" height="52" rx="10" fill="url(#ftIconBg)" />
+                <ellipse cx="23" cy="44" rx="21" ry="17" fill="url(#ftArchGlow)" />
                 <path
-                  d="M7 33 L7 18 C7 10.8 13 5 20 5 C27 5 33 10.8 33 18 L33 33"
-                  stroke="white"
-                  strokeWidth="2.6"
+                  d="M6 47 L6 22 Q6 5 23 5 Q40 5 40 22 L40 47"
                   fill="none"
+                  stroke="white"
+                  strokeWidth="3.5"
                   strokeLinecap="round"
                 />
-                {/* Road perspective lines into the tunnel */}
-                <path
-                  d="M7 33 L15.5 26.5 M33 33 L24.5 26.5 M15.5 26.5 L24.5 26.5"
-                  stroke="rgba(255,255,255,0.62)"
-                  strokeWidth="1.9"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <rect x="20" y="39" width="6" height="3.5" rx="1.5" fill="white" opacity="0.88" />
+                <rect x="20.5" y="33" width="5" height="2.5" rx="1" fill="white" opacity="0.62" />
+                <rect x="21" y="28" width="4" height="1.8" rx="0.8" fill="white" opacity="0.42" />
               </svg>
+
               {/* Wordmark — light variant for dark footer */}
               <div className="flex flex-col leading-none">
-                <div className="flex items-baseline">
-                  <span className="font-syne font-extrabold text-[1.08rem] text-[#9795F8]">Clear</span>
-                  <span className="font-syne font-extrabold text-[1.08rem] text-white">Steps</span>
+                <div className="flex items-baseline gap-[2px]">
+                  <span className="font-syne font-extrabold text-[1.38rem] text-[#8A88F5] leading-none">Clear</span>
+                  <span className="font-syne font-black text-[1.38rem] text-white leading-none"> Steps</span>
                 </div>
-                <span className="text-[0.5rem] font-semibold text-white/40 tracking-[0.16em] uppercase mt-[1px]">
+                <span className="text-[0.52rem] font-semibold text-white/40 tracking-[0.22em] uppercase mt-[3px]">
                   Learning Made Simple
                 </span>
               </div>
