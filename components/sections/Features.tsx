@@ -103,9 +103,9 @@ function WideCard() {
   const inViewRef = useRef<HTMLDivElement>(null);
   const inView = useInView(inViewRef, { once: true, margin: "-60px" });
 
-  const keywords = useCountUp(9, 720, inView);
-  const format = useCountUp(7, 930, inView);
-  const displayedTip = useTypewriter(tipText, 1120, inView);
+  const keywords = useCountUp(9, 3130, inView);
+  const format = useCountUp(7, 4040, inView);
+  const displayedTip = useTypewriter(tipText, 4870, inView);
 
   return (
     // Outer: handles stagger fadeUpItem from parent + inView detection
@@ -132,7 +132,7 @@ function WideCard() {
               ? { top: ["0%", "110%"], opacity: [0, 1, 1, 0] }
               : { top: "0%", opacity: 0 }
           }
-          transition={{ duration: 1.15, ease: "linear", delay: 0.15 }}
+          transition={{ duration: 5, ease: "linear", delay: 0.15 }}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
@@ -143,7 +143,7 @@ function WideCard() {
               className="w-12 h-12 rounded-[13px] bg-white/10 flex items-center justify-center mb-4 text-white/80"
               initial={{ opacity: 0, scale: 0.7 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.4, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
             >
               <Icon name="cpu-chip" size={22} />
             </motion.div>
@@ -153,7 +153,7 @@ function WideCard() {
               className="font-syne font-extrabold text-[1.15rem] text-white/90 mb-2 tracking-[-0.02em]"
               initial={{ opacity: 0, y: 14 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, delay: 1.8, ease: [0.22, 1, 0.36, 1] }}
             >
               AI Answer Evaluation — The Thing Nobody Else Does
             </motion.div>
@@ -163,7 +163,7 @@ function WideCard() {
               className="text-[0.9rem] leading-[1.65] text-white/60 mb-4"
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.56, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, delay: 2.4, ease: [0.22, 1, 0.36, 1] }}
             >
               Upload a photo of your handwritten answer. Our AI reads it and marks
               it against the official CBSE marking scheme — checking keywords,
@@ -174,9 +174,9 @@ function WideCard() {
             <div className="flex flex-wrap gap-2">
               {(
                 [
-                  ["CBSE Marking Scheme", "bg-amber/15 text-amber", 0.76],
-                  ["Handwriting Recognition", "bg-teal/15 text-teal-2", 0.84],
-                  ["Instant Feedback", "bg-green/15 text-green-2", 0.92],
+                  ["CBSE Marking Scheme", "bg-amber/15 text-amber", 3.3],
+                  ["Handwriting Recognition", "bg-teal/15 text-teal-2", 3.65],
+                  ["Instant Feedback", "bg-green/15 text-green-2", 4.0],
                 ] as [string, string, number][]
               ).map(([label, cls, d]) => (
                 <motion.span
@@ -202,14 +202,14 @@ function WideCard() {
             className="bg-white/6 rounded-2xl p-4"
             initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, delay: 2.2, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Header dot — pulses like "processing" */}
             <div className="flex items-center gap-2 mb-3">
               <motion.div
                 className="w-1.5 h-1.5 rounded-full bg-teal"
                 animate={inView ? { scale: [1, 1.9, 1, 1.9, 1] } : {}}
-                transition={{ duration: 1.0, delay: 0.65 }}
+                transition={{ duration: 1.0, delay: 2.8 }}
               />
               <div className="font-semibold text-white/90 text-[0.74rem]">
                 Marking breakdown
@@ -229,7 +229,7 @@ function WideCard() {
                   className="h-full bg-gradient-to-r from-teal to-teal-2 rounded-full"
                   initial={{ width: 0 }}
                   animate={inView ? { width: "90%" } : {}}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.72 }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 3.1 }}
                 />
               </div>
             </div>
@@ -247,7 +247,7 @@ function WideCard() {
                   className="h-full bg-gradient-to-r from-amber to-amber-2 rounded-full"
                   initial={{ width: 0 }}
                   animate={inView ? { width: "70%" } : {}}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.93 }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 4.0 }}
                 />
               </div>
             </div>
@@ -257,7 +257,7 @@ function WideCard() {
               className="bg-amber/12 rounded-xl p-2.5 text-[0.7rem] text-white/70 leading-[1.5] flex items-start gap-1.5 min-h-[52px]"
               initial={{ opacity: 0, y: 8 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.3, delay: 1.12 }}
+              transition={{ duration: 0.3, delay: 4.85 }}
             >
               <Icon
                 name="light-bulb"
