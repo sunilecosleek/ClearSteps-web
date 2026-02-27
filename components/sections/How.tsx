@@ -53,46 +53,112 @@ function useCountUp(target: number, delayMs: number, active: boolean) {
   return val;
 }
 
-// ── Step 1: Drill / topic selector ───────────────────────────────────────────
+// ── Step 1: Drill / topic selector — continuous selection loop ───────────────
 function DrillVis({ active }: { active: boolean }) {
-  const rows = [
+  const rows: [string, string][] = [
     ["Subject", "Science"],
     ["Chapter", "Life Processes"],
     ["Topic",   "Photosynthesis"],
   ];
+
+  const [phase,      setPhase]      = useState(-1);   // which row is "active" (-1 = none, 3 = button)
+  const [selected,   setSelected]   = useState<number[]>([]);
+  const [btnPressed, setBtnPressed] = useState(false);
+  const runningRef  = useRef(false);
+  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => {
+    if (!active) return;
+    runningRef.current = true;
+
+    const schedule = (delay: number, fn: () => void) => {
+      const t = setTimeout(fn, delay);
+      timeoutsRef.current.push(t);
+    };
+    const clearAll = () => {
+      timeoutsRef.current.forEach(clearTimeout);
+      timeoutsRef.current = [];
+    };
+
+    const loop = () => {
+      if (!runningRef.current) return;
+      clearAll();
+
+      // Reset everything
+      setPhase(-1);
+      setSelected([]);
+      setBtnPressed(false);
+
+      // Highlight Subject → select
+      schedule(500,  () => setPhase(0));
+      schedule(1050, () => setSelected([0]));
+
+      // Highlight Chapter → select
+      schedule(1450, () => setPhase(1));
+      schedule(2000, () => setSelected(prev => [...prev, 1]));
+
+      // Highlight Topic → select
+      schedule(2400, () => setPhase(2));
+      schedule(2950, () => setSelected(prev => [...prev, 2]));
+
+      // Button — hover, then press
+      schedule(3450, () => setPhase(3));
+      schedule(3950, () => setBtnPressed(true));
+
+      // Pause at "pressed" then restart loop
+      schedule(5000, loop);
+    };
+
+    loop();
+
+    return () => {
+      runningRef.current = false;
+      clearAll();
+    };
+  }, [active]);
+
   return (
     <div className="flex flex-col gap-2">
-      <motion.div
-        className="text-[0.7rem] font-bold uppercase tracking-[0.08em] text-ink-3 mb-1"
-        initial={{ opacity: 0 }}
-        animate={active ? { opacity: 1 } : {}}
-        transition={{ duration: 0.3, delay: 0.05 }}
-      >
+      <div className="text-[0.7rem] font-bold uppercase tracking-[0.08em] text-ink-3 mb-1">
         Select your focus
-      </motion.div>
+      </div>
 
       {rows.map(([label, val], i) => (
-        <motion.div
-          key={label}
-          className="flex items-center gap-2"
-          initial={{ opacity: 0, x: -14 }}
-          animate={active ? { opacity: 1, x: 0 } : {}}
-          transition={{ delay: 0.15 + i * 0.14, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div key={label} className="flex items-center gap-2">
           <div className="text-[0.7rem] font-bold uppercase tracking-[0.08em] text-ink-3 w-[60px] flex-shrink-0">
             {label}
           </div>
-          <div className="flex-1 bg-primary/10 border border-primary/25 rounded-lg px-2.5 py-1.5 font-syne font-bold text-[0.8rem] text-primary flex items-center justify-between">
-            {val} <span className="text-ink-3 text-[0.7rem]">▾</span>
-          </div>
-        </motion.div>
+          <motion.div
+            className="flex-1 border rounded-lg px-2.5 py-1.5 font-syne font-bold text-[0.8rem] flex items-center justify-between"
+            animate={{
+              scale:           phase === i ? 1.03 : 1,
+              backgroundColor: phase === i ? "rgba(78,75,229,0.14)" : "rgba(78,75,229,0.07)",
+              borderColor:     phase === i
+                ? "rgba(78,75,229,0.6)"
+                : selected.includes(i)
+                ? "rgba(78,75,229,0.35)"
+                : "rgba(78,75,229,0.18)",
+              boxShadow:       phase === i
+                ? "0 0 0 3px rgba(78,75,229,0.14)"
+                : "0 0 0 0px rgba(78,75,229,0)",
+              color: selected.includes(i) ? "#4E4BE5" : "#9BA0B0",
+            }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <span>{selected.includes(i) ? val : "···"}</span>
+            <span style={{ color: "#9BA0B0", fontSize: "0.7rem" }}>▾</span>
+          </motion.div>
+        </div>
       ))}
 
       <motion.div
-        className="mt-2 bg-ink text-white rounded-lg py-2 px-3 text-center font-syne font-bold text-[0.78rem]"
-        initial={{ opacity: 0, y: 10 }}
-        animate={active ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.72, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-2 rounded-lg py-2 px-3 text-center font-syne font-bold text-[0.78rem] text-white"
+        animate={{
+          scale:           btnPressed ? 0.93 : phase === 3 ? 1.04 : 1,
+          backgroundColor: btnPressed ? "#4E4BE5" : phase === 3 ? "#2A2840" : "#0F0F1A",
+          opacity:         selected.length < 3 ? 0.4 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 420, damping: 22 }}
       >
         Start Learning →
       </motion.div>
