@@ -7,10 +7,10 @@ const cols = [
   {
     title: "Product",
     links: [
-      { label: "How It Works", href: "#how" },
-      { label: "Features", href: "#features" },
-      { label: "Pricing", href: "#pricing" },
-      { label: "For Parents", href: "#parents" },
+      { label: "How It Works", href: "/#how" },
+      { label: "Features", href: "/#features" },
+      { label: "Pricing", href: "/#pricing" },
+      { label: "For Parents", href: "/#parents" },
       { label: "Study Tips", href: "/insights" },
     ],
   },
