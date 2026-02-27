@@ -6,15 +6,21 @@ import { staggerContainer, fadeUpItem } from "@/lib/hooks";
 const cols = [
   {
     title: "Product",
-    links: ["How It Works", "Features", "Pricing", "For Parents", "Free Mock Tests"],
-  },
-  {
-    title: "Subjects",
-    links: ["Science", "Mathematics", "Physics & Chemistry", "Biology", "English & SST"],
+    links: [
+      { label: "How It Works", href: "#how" },
+      { label: "Features", href: "#features" },
+      { label: "Pricing", href: "#pricing" },
+      { label: "For Parents", href: "#parents" },
+      { label: "Study Tips", href: "/insights" },
+    ],
   },
   {
     title: "Company",
-    links: ["About Ecosleek", "Blog", "Contact", "Privacy Policy", "Terms of Service"],
+    links: [
+      { label: "About Ecosleek", href: "https://ecosleek.in" },
+      { label: "Privacy Policy", href: "#" },
+      { label: "Terms of Service", href: "#" },
+    ],
   },
 ];
 
@@ -67,7 +73,7 @@ export default function Footer() {
     <footer className="bg-ink border-t border-white/6 pt-14 pb-7">
       <div className="max-w-[1200px] mx-auto px-5 md:px-[5%]">
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 lg:gap-12 mb-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] gap-10 lg:gap-12 mb-12"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
@@ -144,12 +150,12 @@ export default function Footer() {
               <div className="flex flex-col gap-2">
                 {col.links.map((link) => (
                   <a
-                    key={link}
-                    href="#"
-                    className="text-[0.85rem] text-white/50 hover:text-amber transition-colors cursor-none"
+                    key={link.label}
+                    href={link.href}
+                    className="text-[0.85rem] text-white/50 hover:text-white transition-colors cursor-none"
                     data-cursor-hover
                   >
-                    {link}
+                    {link.label}
                   </a>
                 ))}
               </div>
