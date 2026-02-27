@@ -75,17 +75,37 @@ export default function Footer() {
         >
           {/* Brand col */}
           <motion.div variants={fadeUpItem}>
-            <a href="#" className="flex items-center gap-2.5 mb-4 no-underline" data-cursor-hover>
-              <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                  <path d="M2 17l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
+            <a href="/" className="flex items-center gap-2.5 mb-4 no-underline" data-cursor-hover>
+              {/* Icon: same brand icon, slightly lighter purple on dark bg */}
+              <svg width="42" height="42" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="40" height="40" rx="9" fill="#5957F5" />
+                {/* Arch outline */}
+                <path
+                  d="M7 33 L7 18 C7 10.8 13 5 20 5 C27 5 33 10.8 33 18 L33 33"
+                  stroke="white"
+                  strokeWidth="2.6"
+                  fill="none"
+                  strokeLinecap="round"
+                />
+                {/* Road perspective lines into the tunnel */}
+                <path
+                  d="M7 33 L15.5 26.5 M33 33 L24.5 26.5 M15.5 26.5 L24.5 26.5"
+                  stroke="rgba(255,255,255,0.62)"
+                  strokeWidth="1.9"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {/* Wordmark — light variant for dark footer */}
+              <div className="flex flex-col leading-none">
+                <div className="flex items-baseline">
+                  <span className="font-syne font-extrabold text-[1.08rem] text-[#9795F8]">Clear</span>
+                  <span className="font-syne font-extrabold text-[1.08rem] text-white">Steps</span>
+                </div>
+                <span className="text-[0.5rem] font-semibold text-white/40 tracking-[0.16em] uppercase mt-[1px]">
+                  Learning Made Simple
+                </span>
               </div>
-              <span className="font-syne font-extrabold text-[1.12rem] text-white tracking-tight">
-                Clear Steps
-              </span>
             </a>
             <p className="text-[0.86rem] leading-[1.72] text-white/50 max-w-[260px] mb-5">
               Complete CBSE learning — from concept to exam, with AI at every step. Built by Ecosleek Tech, Hyderabad.

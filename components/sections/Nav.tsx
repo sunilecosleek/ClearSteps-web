@@ -96,35 +96,44 @@ export default function Nav() {
         )}
       >
         {/* Logo */}
-        <a
-          href="#"
+        <motion.a
+          href="/"
           className="flex items-center gap-2.5 no-underline"
+          whileHover={{ scale: 1.03 }}
+          transition={{ type: "spring", stiffness: 340, damping: 18 }}
           data-cursor-hover
         >
-          <motion.div
-            className="w-10 h-10 bg-ink rounded-xl flex items-center justify-center"
-            whileHover={{ rotate: -6, scale: 1.1, backgroundColor: "#4E4BE5" }}
-            transition={{ type: "spring", stiffness: 300, damping: 15 }}
-          >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
+          {/* Icon: purple rounded square with arch + road */}
+          <svg width="42" height="42" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="9" fill="#4E4BE5" />
+            {/* Arch outline */}
+            <path
+              d="M7 33 L7 18 C7 10.8 13 5 20 5 C27 5 33 10.8 33 18 L33 33"
               stroke="white"
-              strokeWidth="2.5"
+              strokeWidth="2.6"
+              fill="none"
+              strokeLinecap="round"
+            />
+            {/* Road perspective lines into the tunnel */}
+            <path
+              d="M7 33 L15.5 26.5 M33 33 L24.5 26.5 M15.5 26.5 L24.5 26.5"
+              stroke="rgba(255,255,255,0.62)"
+              strokeWidth="1.9"
               strokeLinecap="round"
               strokeLinejoin="round"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-          </motion.div>
-          <span className="font-syne font-extrabold text-[1.12rem] text-ink tracking-tight">
-            Clear Steps
-          </span>
-        </a>
+            />
+          </svg>
+          {/* Wordmark */}
+          <div className="flex flex-col leading-none">
+            <div className="flex items-baseline">
+              <span className="font-syne font-extrabold text-[1.08rem] text-[#4E4BE5]">Clear</span>
+              <span className="font-syne font-extrabold text-[1.08rem] text-ink">Steps</span>
+            </div>
+            <span className="text-[0.5rem] font-semibold text-ink-3 tracking-[0.16em] uppercase mt-[1px]">
+              Learning Made Simple
+            </span>
+          </div>
+        </motion.a>
 
         {/* Desktop links */}
         <div className="hidden lg:flex items-center gap-7">
