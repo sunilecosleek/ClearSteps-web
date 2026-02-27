@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useMagneticButton } from "@/lib/hooks";
@@ -42,6 +43,8 @@ function MagneticNavBtn({
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -57,6 +60,11 @@ export default function Nav() {
 
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
+    if (!isHome) {
+      // On non-home pages, navigate to home with the hash
+      window.location.href = `/${href}`;
+      return;
+    }
     setTimeout(() => {
       const el = document.querySelector(href);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
